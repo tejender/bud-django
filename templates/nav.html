@@ -1,0 +1,30 @@
+<style>
+    .nav-container{
+        display:flex;
+        {% comment %} justify-content:center; {% endcomment %}
+        gap:15px;
+        align-items:center;
+        {% comment %} background:blue; {% endcomment %}
+        height:50px;
+    }
+    .logo{
+        width:200px;
+        height:50px;
+        padding-top:0;
+        margin-left:100px;
+        {% comment %} background:red; {% endcomment %}
+        font-size:40px
+    }
+</style>
+<div class="nav-container">
+    <div class="logo">       
+            <a href="/"> BUDDY</a>        
+    </div>
+    <div>
+        <form action="{%url 'home'%}" method="get">
+            <input type="text" name="q" placeholder="search rooms"/>
+        </form>
+    </div>
+
+</div>
+<hr>

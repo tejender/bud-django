@@ -1,0 +1,5 @@
+db.sqlite3
+base/__pycache__
+base/migrations
+bud/__pycache__
+
