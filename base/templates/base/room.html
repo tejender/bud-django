@@ -1,14 +1,68 @@
+<style>
+   .room-container{
+      display:grid;
+      grid-template-columns: 3fr 1fr;
+      width:90%;      
+      margin:0 auto;
+   }
+</style>
 {% extends 'main.html' %}
 
 {% block content %}
-<div>
+<div class="room-container">
 
-   <h2>
-      {{room.name}}
-   </h2>
-   <p>
-      {{room.description}}
-   </p>
+   <div class="room-content">
+
+      
+      <div>
+         
+         <h2>
+            {{room.name}}
+         </h2>
+         <p>
+            {{room.description}}
+         </p>
+         <hr>
+      </div>
+      {% if request.user.is_authenticated %}   
+      <div class="comment-form">
+         <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="body" placeholder="write your message here">
+         </form>
+         
+      </div>
+      {% endif %}
+      <div>
+         <b>Conversation</b>
+         {% for message in room_messages %}
+         <div>
+            <p>
+               {{message.body}}
+            </p>
+            <small> by @{{message.user}} {{message.created | timesince}} ago</small>
+            {% if request.user == message.user %}
+               <small><a href="{% url 'delete-message' message.id %}">Delete</a></small>
+            {% endif %}
+            <br>
+            <hr>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+
+   <div class="right-bar">
+      <h3>
+         Participants <br>
+      </h3>
+      <div>
+         {% for participant in participants %}
+          <p>{{participant.username}}</p>
+         {% endfor %}
+      </div>
+   </div>
+
+   
 </div>
 
 {% endblock content %}
