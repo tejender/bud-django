@@ -15,6 +15,10 @@
         {% comment %} background:red; {% endcomment %}
         font-size:40px
     }
+    .login-sign{
+        display:flex;
+        gap:15px;
+    }
 </style>
 <div class="nav-container">
     <div class="logo">       
@@ -25,6 +29,23 @@
             <input type="text" name="q" placeholder="search rooms"/>
         </form>
     </div>
+    
+    <div class="login-sign">
+        {% if request.user.is_authenticated %}
+        <a href="{%url 'logout'%}">Logout ({{request.user}})</a>
+        {% else %}
+        <div>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+        <div>
+            <a href="{% url 'login' %}">Signup</a>
+        </div>
+        {% endif %}
+    </div>
+
+    
+
+    
 
 </div>
 <hr>
